@@ -1,0 +1,17 @@
+﻿@page "/master"
+
+<h3>Master</h3>
+
+@code {
+    [CascadingParameter]
+    public EventCallback notify { get; set; }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //Whenever it is run first time, it has to tell whether the authentication is done or not.
+        if (firstRender)
+        {
+            //Will invoke the MainLayout.razor page and check whether the user is authenticated or not.
+            await notify.InvokeAsync();
+        }
+    }
+}
